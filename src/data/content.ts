@@ -9,9 +9,9 @@ export const profile = {
   focus: "Distributed Systems · Financial Services",
   phone: "8809682225",
   email: "2000shahid2019@gmail.com",
-  linkedin: "https://linkedin.com/in/mdshahidalikhan",
+  linkedin: "https://linkedin.com/in/md-shahid-ali-khan-aa18371b0",
   linkedinLabel: "linkedin.com/mdshahidalikhan",
-  github: "https://github.com/mdshahidalikhan",
+  github: "https://github.com/mdshahidalikhan02",
   githubLabel: "github.com/mdshahidalikhan",
   location: "Bangalore, India",
   summary:
