@@ -1,4 +1,4 @@
-import { profile } from "../data/content";
+import { profile, RESUME_PATH } from "../data/content";
 import { SectionHeading } from "./Metrics";
 
 export default function Contact() {
@@ -15,6 +15,18 @@ export default function Contact() {
           <ContactCard label="Phone" value={profile.phone} href={`tel:+91${profile.phone}`} />
           <ContactCard label="LinkedIn" value={profile.linkedinLabel} href={profile.linkedin} />
           <ContactCard label="GitHub" value={profile.githubLabel} href={profile.github} />
+          <a
+            href={RESUME_PATH}
+            download
+            className="card group flex flex-col p-5 transition-colors hover:border-signal/50 sm:col-span-2"
+          >
+            <span className="font-mono text-[0.68rem] uppercase tracking-wide text-text-faint">
+              Resume
+            </span>
+            <span className="mt-1.5 flex items-center gap-2 text-[0.95rem] text-text group-hover:text-signal">
+              Download Md_Shahid_Khan_Resume.pdf ↓
+            </span>
+          </a>
         </div>
       </div>
     </section>

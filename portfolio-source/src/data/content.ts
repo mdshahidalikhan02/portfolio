@@ -1,6 +1,8 @@
 // All facts below are sourced directly from Md Shahid Ali Khan's resume.
 // Nothing here is invented — metrics, dates, and scope are quoted as stated.
 
+export const RESUME_PATH = `${import.meta.env.BASE_URL}resume/Md_Shahid_Khan_Resume.pdf`;
+
 export const profile = {
   name: "Md Shahid Ali Khan",
   role: "Backend Software Engineer",

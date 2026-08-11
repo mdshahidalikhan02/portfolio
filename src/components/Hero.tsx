@@ -1,4 +1,4 @@
-import { profile } from "../data/content";
+import { profile, RESUME_PATH } from "../data/content";
 import TraceBar from "./TraceBar";
 import { useSectionNav } from "../lib/navigation";
 
@@ -42,6 +42,13 @@ export default function Hero() {
               className="rounded-full border border-hairline-strong px-6 py-3 font-mono text-[0.8rem] uppercase tracking-wide text-text transition-colors hover:border-signal hover:text-signal"
             >
               Get in touch
+            </a>
+            <a
+              href={RESUME_PATH}
+              download
+              className="inline-flex items-center gap-2 font-mono text-[0.8rem] uppercase tracking-wide text-text-muted transition-colors hover:text-signal"
+            >
+              ↓ Download resume
             </a>
           </div>
         </div>

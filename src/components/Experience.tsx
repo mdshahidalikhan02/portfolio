@@ -12,7 +12,6 @@ export default function Experience() {
             <div key={i} className="relative border-l border-hairline pl-8 pb-14 last:pb-0 sm:pl-10">
               <span className="absolute -left-[7px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-signal bg-bg" />
 
-
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="font-display text-xl font-semibold text-text sm:text-2xl">
                   {job.role} <span className="text-text-muted">· {job.company}</span>
