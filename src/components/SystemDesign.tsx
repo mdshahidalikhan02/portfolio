@@ -56,15 +56,15 @@ export default function SystemDesign() {
 
           <DiagramColumn
             accent="signal"
-            title="payment gateway :: transaction request"
+            title="workflow platform :: job request"
             nodes={[
-              { label: "Client request + idempotency key", note: "Card / UPI / Net Banking / Wallet" },
-              { label: "Redis SETNX idempotency check", note: "Retry short-circuited if key exists" },
-              { label: "Strategy adapter → payment rail", note: "One contract, per-rail implementation" },
-              { label: "DB write + Outbox row (same txn)", note: "Transactional Outbox pattern" },
-              { label: "Relay → Kafka event", note: "At-least-once, idempotent consumers" },
-              { label: "SAGA compensation on failure", note: "Unwinds prior steps, not just retries" },
-              { label: "Webhook delivery (HMAC-signed)", note: "Backoff → DLQ replay on failure" },
+              { label: "Client request", note: "Kind cluster, 3 nodes" },
+              { label: "Redis + Lua atomic rate limiter", note: "4K+ RPS · 70ms P95 / 120ms P99 @ 5x load" },
+              { label: "Cache lookup (L1 / Redis L2)", note: "90%+ hit ratio · 50ms → <5ms on hits" },
+              { label: "Kafka job queue", note: "At-least-once delivery, 3–5 workers" },
+              { label: "Idempotent job handler", note: "10,000+ jobs, zero duplicate side effects" },
+              { label: "Lease lock + fencing token", note: "Rejects stale writes from paused nodes" },
+              { label: "Leader election", note: "5–10s failover after leader pod kill" },
             ]}
           />
         </div>

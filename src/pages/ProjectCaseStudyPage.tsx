@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { projects } from "../data/content";
-import { PaymentDiagram } from "../components/CaseStudyPreview";
+import { WorkflowDiagram } from "../components/CaseStudyPreview";
 
 export default function ProjectCaseStudyPage() {
   const { slug } = useParams();
@@ -49,7 +49,7 @@ export default function ProjectCaseStudyPage() {
             <p className="text-[1.02rem] leading-relaxed text-text-muted">{cs.architecture}</p>
             <div className="card mt-6 max-w-md p-6">
               <p className="eyebrow mb-4">request flow</p>
-              <PaymentDiagram />
+              <WorkflowDiagram />
             </div>
           </Section>
 
