@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  /* ---- Color tokens ---- */
   --color-bg: #0B0E14;
   --color-surface: #12161F;
   --color-surface-raised: #171C27;
@@ -10,12 +9,11 @@
   --color-text: #E6E9F0;
   --color-text-muted: #8B93A7;
   --color-text-faint: #5B6376;
-  --color-signal: #D9A441;      /* amber — log/warn marker, primary accent */
+  --color-signal: #D9A441;
   --color-signal-dim: #8A6A34;
-  --color-ok: #4FD1C5;          /* teal — healthy/success metric accent */
-  --color-danger: #C0605A;      /* muted red — failure-scenario accent */
+  --color-ok: #4FD1C5;
+  --color-danger: #C0605A;
 
-  /* ---- Type ---- */
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
@@ -24,31 +22,17 @@
 }
 
 @layer base {
-  * {
-    border-color: var(--color-hairline);
-  }
-  html {
-    scroll-behavior: smooth;
-  }
+  * { border-color: var(--color-hairline); }
+  html { scroll-behavior: smooth; }
   body {
     background-color: var(--color-bg);
     color: var(--color-text);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
   }
-  ::selection {
-    background: var(--color-signal);
-    color: #0B0E14;
-  }
-  :focus-visible {
-    outline: 2px solid var(--color-signal);
-    outline-offset: 3px;
-  }
-
-  h1, h2, h3, h4 {
-    font-family: var(--font-display);
-    letter-spacing: -0.01em;
-  }
+  ::selection { background: var(--color-signal); color: #0B0E14; }
+  :focus-visible { outline: 2px solid var(--color-signal); outline-offset: 3px; }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.01em; }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -73,9 +57,7 @@
     padding-right: 1.5rem;
   }
 
-  .hairline {
-    border-color: var(--color-hairline);
-  }
+  .hairline { border-color: var(--color-hairline); }
 
   .bg-grid {
     background-image:
@@ -84,9 +66,7 @@
     background-size: 40px 40px;
   }
 
-  .text-glow {
-    text-shadow: 0 0 32px rgba(217,164,65,0.25);
-  }
+  .text-glow { text-shadow: 0 0 32px rgba(217,164,65,0.25); }
 
   .eyebrow {
     font-family: var(--font-mono);
@@ -102,9 +82,7 @@
     border-radius: 0.75rem;
   }
 
-  .fade-up {
-    animation: fadeUp 0.6s ease-out both;
-  }
+  .fade-up { animation: fadeUp 0.6s ease-out both; }
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(14px); }
     to { opacity: 1; transform: translateY(0); }

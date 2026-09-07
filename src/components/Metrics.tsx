@@ -7,8 +7,8 @@ export default function Metrics() {
       <div className="container-page">
         <SectionHeading eyebrow="[metrics] engineering-impact" title="Measured, not estimated" />
         <p className="mt-4 max-w-2xl text-text-muted">
-          Every number below is a stated outcome from production or benchmark work —
-          no percentages invented, no vanity metrics.
+          Every number below is a stated outcome from production work — no percentages invented,
+          no vanity metrics.
         </p>
 
         <div className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">

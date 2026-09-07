@@ -5,7 +5,7 @@ export const RESUME_PATH = `${import.meta.env.BASE_URL}resume/Md_Shahid_Khan_Res
 
 export const profile = {
   name: "Md Shahid Ali Khan",
-  role: "Backend Software Engineer",
+  role: "Software Engineer",
   focus: "Distributed Systems · Financial Services",
   phone: "8809682225",
   email: "2000shahid2019@gmail.com",
@@ -15,7 +15,7 @@ export const profile = {
   githubLabel: "github.com/mdshahidalikhan",
   location: "Bangalore, India",
   summary:
-    "Backend Software Engineer with 3+ years of experience in Java and Spring Boot, building microservices and distributed systems using Kafka, Redis, REST APIs, concurrency, and asynchronous processing in the financial services domain.",
+    "Software Engineer with 3+ years of experience in Java and Spring Boot, developing microservices and distributed systems using Kafka, Redis, REST APIs, concurrency, and asynchronous processing in the financial services domain.",
 };
 
 export const metrics = [
@@ -26,7 +26,7 @@ export const metrics = [
     beforeVal: 10,
     afterVal: 2,
     unit: "s",
-    detail: "Two-level caching (in-memory L1 + Redis L2) for optimized report requests.",
+    detail: "Caffeine-based L1 caching with tuned cache keys, TTLs, and eviction policies.",
   },
   {
     label: "Report generation time",
@@ -35,52 +35,16 @@ export const metrics = [
     beforeVal: 120,
     afterVal: 30,
     unit: "s",
-    detail: "Cache key, TTL, and eviction tuning on top of the L1/L2 cache layer.",
+    detail: "Same Caffeine L1 caching pass, tuned alongside the response-time optimization.",
   },
   {
-    label: "Cache-hit read latency",
-    before: "50ms",
-    after: "<5ms",
-    beforeVal: 50,
-    afterVal: 5,
-    unit: "ms",
-    detail: "90%+ cache hit ratio on the distributed workflow platform.",
-  },
-  {
-    label: "Rate limiter throughput",
-    before: null,
-    after: "4K+ RPS",
-    beforeVal: null,
-    afterVal: 4000,
-    unit: "rps",
-    detail: "70ms P95 / 120ms P99 latency at 5x normal load — Redis/Lua atomic rate limiting.",
-  },
-  {
-    label: "Leader failover time",
-    before: null,
-    after: "5–10s",
-    beforeVal: null,
-    afterVal: 10,
-    unit: "s",
-    detail: "After forced leader pod termination, via leader election.",
-  },
-  {
-    label: "Jobs processed, zero duplicate side effects",
-    before: null,
-    after: "10,000+",
-    beforeVal: null,
-    afterVal: 10000,
-    unit: "jobs",
-    detail: "Across 3–5 workers, including forced retries — idempotent consumers.",
-  },
-  {
-    label: "Records processed / report run",
+    label: "Report workload volume",
     before: null,
     after: "50K+",
     beforeVal: null,
     afterVal: 50000,
     unit: "records",
-    detail: "Across financial risk analysis and reporting workloads.",
+    detail: "MDX queries against ActivePivot in-memory OLAP cubes for risk analysis and reporting.",
   },
   {
     label: "Transaction records analyzed",
@@ -100,6 +64,15 @@ export const metrics = [
     unit: "scripts",
     detail: "Unix shell scripts migrated to Linux and refactored for maintainability.",
   },
+  {
+    label: "Interns mentored → converted to FTE",
+    before: null,
+    after: "2",
+    beforeVal: null,
+    afterVal: 2,
+    unit: "interns",
+    detail: "Through code reviews and knowledge-transfer sessions.",
+  },
 ];
 
 export type Experience = {
@@ -117,23 +90,25 @@ export const experience: Experience[] = [
     company: "Societe Generale",
     role: "Software Engineer",
     period: "July 2023 – Present",
-    location: "Bangalore",
-    project: "Report Generation & Risk Analytics Platform",
-    stack: ["Spring Boot", "Microservices", "Kafka", "Redis"],
+    location: "Bangalore, India",
+    project: "Financial Risk Reporting Platform",
+    stack: ["Java", "Spring Boot", "Microservices", "REST APIs", "Kafka", "ActivePivot", "Caffeine", "PostgreSQL"],
     bullets: [
-      "Drove the development and modernization of a financial risk analytics platform generating NPV, GAP, and NIM reports, evolving it from a modular monolith toward independently deployable microservices.",
-      "Designed a two-level caching architecture using an in-memory L1 cache and Redis-based L2 distributed cache, reducing API response time from 10 seconds to under 2 seconds for optimized report requests.",
-      "Optimized cache keys, TTLs, and eviction, cutting report generation time from 2 minutes to 30 seconds.",
+      "Developed and enhanced Java/Spring Boot backend services and REST APIs for an enterprise financial risk analytics platform supporting NPV, NIM, GAP, sensitivity analysis, and regulatory reporting.",
+      "Developed analytical reporting workflows using MDX against ActivePivot in-memory OLAP cubes, leveraging olap4j/qfs-olap4j for Java-based OLAP connectivity and RafalQuery APIs for analytical data retrieval, supporting 50K+ record report workloads across financial risk analysis and reporting.",
+      "Implemented Caffeine-based L1 caching, optimizing cache keys, TTLs, and eviction policies to reduce API response time from 10s to under 2s and report generation time from 2min to 30s.",
       "Refactored long-running report generation into Kafka-driven asynchronous workflows, enabling concurrent report processing and improving API responsiveness.",
-      "Implemented resilient Kafka consumer workflows with retries, Dead Letter Topics (DLTs), and automated email notifications for failed report batches.",
-      "Processed 50K+ records per report execution across financial risk analysis and reporting workloads.",
+      "Implemented resilient Kafka consumer workflows with retry handling and MessengerClient consumers for automated email notifications on failed report batches.",
+      "Implemented scheduled background jobs and dedicated thread pools for report, export, and cache-refresh workflows, with Resilience4j Circuit Breaker for failure handling.",
+      "Contributed to Angular feature development and production bug fixes, supporting GitHub Actions CI/CD.",
+      "Conducted code reviews and knowledge-transfer sessions, mentoring 2 interns who subsequently converted to FTE.",
     ],
   },
   {
     company: "Societe Generale",
     role: "Software Developer Intern",
     period: "March 2023 – July 2023",
-    location: "Bangalore",
+    location: "Bangalore, India",
     project: "Rejected Transaction Impact Analysis & Script Migration",
     stack: ["Spring Boot", "SQL", "Linux"],
     bullets: [
@@ -173,90 +148,87 @@ export const projects: Project[] = [
     name: "Distributed Workflow & Job Processing Platform",
     type: "Personal Project",
     tagline:
-      "A fault-tolerant workflow platform on a real Kubernetes cluster — rate limiting, caching, distributed locking, leader election, and async job processing, all failure-tested.",
-    stack: [
-      "Java 25",
-      "Spring Boot",
-      "Redis",
-      "Kafka",
-      "PostgreSQL",
-      "Docker",
-      "Kubernetes",
-      "Lua",
-    ],
+      "An asynchronous job-processing platform built around atomic state transitions, Transactional Outbox delivery, cache-aside caching, and idempotent handling of duplicate Kafka messages.",
+    stack: ["Java", "Spring Boot", "Kafka", "Redis", "Caffeine", "PostgreSQL", "Resilience4j", "Docker"],
     featured: true,
     bullets: [
-      "Built a fault-tolerant distributed workflow platform on a local 3-node Kubernetes (Kind) cluster, combining Redis-backed rate limiting, caching, distributed locking, leader election, and Kafka-based asynchronous job processing.",
-      "Implemented Redis/Lua-based atomic rate limiting, sustaining 4K+ RPS with 70ms P95 / 120ms P99 latency at 5x normal load; achieved a 90%+ cache hit ratio, reducing read latency from 50ms to under 5ms on cache hits.",
-      "Built a Kafka-based job processing pipeline with at-least-once delivery, idempotent consumers, exponential backoff, and DLQ recovery, processing 10,000+ jobs across 3–5 workers without duplicate side effects during forced retries.",
-      "Implemented lease-based distributed locks with fencing tokens to prevent stale-lock writes and leader election for cluster-wide coordination, achieving 5–10 second failover after leader pod termination.",
-      "Performed resilience and failure-injection testing by simulating pod, Redis, and Kafka failures, validating job recovery, lock handoff, leader re-election, and rate-limit/cache consistency.",
-      "Added Zipkin distributed tracing across the rate-limit, cache, job-queue, locking, and leader-election workflows to identify latency bottlenecks and failure points.",
+      "Built an asynchronous job-processing platform with persistent job lifecycle management, atomic state transitions, Kafka consumer groups, and concurrent workers.",
+      "Implemented the Transactional Outbox pattern for reliable DB-to-Kafka event propagation, preventing dual-write inconsistencies during failures.",
+      "Built Caffeine + Redis L1/L2 caching using the Cache-Aside pattern, along with Redis-based distributed rate limiting using atomic Lua operations.",
+      "Engineered at-least-once Kafka processing with acknowledgements, offset management, atomic job claiming, and idempotency to handle duplicate message delivery.",
+      "Implemented resilient job execution with exponential backoff, nextAttemptAt retries, Kafka error handling, and Dead Letter Topics (DLT), separating job and messaging failures.",
+      "Added Resilience4j Circuit Breaker for Redis dependency failures and Redis distributed locking with expiry for coordination across application instances.",
     ],
     caseStudy: {
       problem:
-        "A distributed workflow platform has to stay correct under conditions a single-node system never faces: multiple pods racing for the same lock, a leader pod dying mid-coordination, a worker crashing after partially processing a job, and traffic spikes that would otherwise overwhelm downstream dependencies. The goal was to build and prove out these failure modes on a real multi-node cluster rather than reason about them on paper — a local 3-node Kubernetes (Kind) cluster, so pod kills, network partitions, and dependency outages are actual events, not simulated ones.",
+        "A job-processing platform that writes to a database and publishes to Kafka is exposed to dual-write inconsistency — the DB commit and the Kafka publish can't both be guaranteed to succeed or fail together as two separate operations. Layered on top of that: Kafka's at-least-once delivery means the same message can arrive twice, multiple application instances can race to claim the same job, and a downstream Redis outage shouldn't be allowed to take every instance down with it.",
       architecture:
-        "The platform layers five concerns on top of each other, each addressing a different way a distributed system drifts from correctness under load or failure. Requests first pass through a Redis/Lua-based atomic rate limiter, so limit-checking is a single atomic operation rather than a race-prone read-then-write. Reads that hit the cache are served from a Redis-backed cache layer tuned for a high hit ratio. Work that shouldn't block the caller is handed to a Kafka-based job processing pipeline with at-least-once delivery, consumed by 3–5 workers. Anything requiring cluster-wide coordination — a job that only one node should run, a resource only one node should touch — goes through lease-based distributed locks with fencing tokens, with leader election handling which node currently owns cluster-wide responsibilities. Zipkin distributed tracing runs across all five layers (rate-limit, cache, job-queue, locking, leader-election) so a slow or failing request can be traced to the specific layer responsible.",
+        "Each job is stored with persistent lifecycle state and moves through atomic state transitions, so concurrent workers can't both believe they own the same job. State changes that must be reflected in Kafka go through the Transactional Outbox pattern — the state change and its outbound event are written in the same local database transaction, removing the class of bug where one succeeds and the other doesn't. Caching is layered as Caffeine (in-process L1) and Redis (distributed L2) using the Cache-Aside pattern: the application checks the cache first and populates it on a miss, rather than the cache being transparently pre-warmed. Redis also backs distributed rate limiting via atomic Lua operations, and distributed locks with expiry for coordinating work across application instances, with a Resilience4j Circuit Breaker wrapping Redis calls so a Redis outage degrades gracefully instead of blocking every instance. Kafka consumption is built for at-least-once delivery — explicit acknowledgements and offset management, paired with atomic job claiming and idempotency checks so a redelivered message can't be processed twice.",
       decisions: [
         {
-          heading: "Atomic rate limiting via Redis + Lua",
-          body: "Rate limiting logic (check count, compare to limit, increment) runs as a single Lua script executed atomically inside Redis, rather than as separate round-trips from the application. This removes the race window where two concurrent requests could both read a count below the limit and both be allowed through, which a naive read-then-write implementation would allow under concurrent load.",
+          heading: "Transactional Outbox for DB-to-Kafka propagation",
+          body: "Writing the job state change and its outbound Kafka event in the same local database transaction removes the dual-write problem outright — there's no window where the database commits but the event never gets published, or the reverse. The database transaction is the single source of truth; publishing becomes a downstream, at-least-once concern.",
         },
         {
-          heading: "Idempotent consumers over exactly-once delivery",
-          body: "Rather than trying to build exactly-once delivery — which is expensive and still leaky in practice — the job pipeline embraces at-least-once delivery from Kafka and makes consumers idempotent, so a message redelivered after a crash or a forced retry produces the same end state instead of a duplicate side effect.",
+          heading: "Cache-Aside with Caffeine (L1) + Redis (L2)",
+          body: "Caffeine serves the hottest, most recently used lookups in-process, with Redis as a shared L2 behind it. Using the Cache-Aside pattern — check cache, populate on miss — keeps the cache layer simple and puts the application explicitly in control of what gets cached and when, rather than depending on a transparent read-through layer.",
         },
         {
-          heading: "Fencing tokens on distributed locks",
-          body: "A lease-based lock alone isn't enough: a node can be paused (GC, scheduling delay) long enough for its lease to expire and be granted to another node, then wake up and write as if it still held the lock. Fencing tokens close this gap — each lock acquisition returns a monotonically increasing token, and the resource being protected rejects writes carrying an old token, so a stale writer physically cannot corrupt state even if it believes it still holds the lock.",
+          heading: "Atomic job claiming + idempotency over exactly-once delivery",
+          body: "Rather than building exactly-once delivery, the platform accepts Kafka's at-least-once guarantee and makes it safe: atomic job claiming ensures only one worker proceeds with a given job even if multiple consumers see the same message, and idempotency checks mean a redelivered message doesn't reapply its side effects.",
         },
         {
-          heading: "Leader election for cluster-wide coordination",
-          body: "Work that must run on exactly one node cluster-wide (not per-request, but per-cluster) is coordinated through leader election rather than external orchestration, so the cluster self-heals when the current leader pod is killed — a new leader is elected without manual intervention.",
+          heading: "Separating job failures from messaging failures",
+          body: "A job that fails for a transient reason (a downstream dependency hiccup) is retried later on its own schedule via exponential backoff and a nextAttemptAt timestamp. A message-level failure (Kafka error, malformed payload) is instead routed to a Dead Letter Topic. Keeping these two failure types on separate paths means a job that just needs to wait and retry is never confused with a message that's actually broken.",
+        },
+        {
+          heading: "Redis locking with expiry, guarded by a circuit breaker",
+          body: "Cross-instance coordination uses Redis distributed locks with an expiry, so a crashed instance can't hold a lock forever. Because this coordination depends on Redis being available, a Resilience4j Circuit Breaker wraps those calls — if Redis starts failing, the breaker trips and the platform degrades instead of every instance blocking on a dependency that's down.",
         },
       ],
       failureScenarios: [
         {
-          heading: "Leader pod terminated mid-coordination",
-          body: "The leader pod is killed outright to simulate a crash. Leader election detects the loss and elects a new leader, with failover measured at 5–10 seconds — validated by deliberately terminating the leader pod, not assumed from the algorithm alone.",
+          heading: "Duplicate Kafka delivery",
+          body: "A message is redelivered under at-least-once semantics — for example, after a consumer restarts before committing its offset. Atomic job claiming and idempotency checks mean the job is not reprocessed a second time even though the message arrived twice.",
         },
         {
-          heading: "Worker crash during job processing",
-          body: "A worker is killed mid-job to simulate a crash. Because Kafka delivery is at-least-once and consumers are idempotent, the job is safely redelivered and reprocessed by another worker without producing duplicate side effects — verified across 10,000+ processed jobs including forced retries.",
+          heading: "Redis becomes unavailable",
+          body: "Repeated failures calling Redis trip the Resilience4j Circuit Breaker, so instances stop hammering a dependency that's down instead of piling up blocked calls. Distributed locks carrying an expiry also ensure a lock is never held indefinitely if the instance that acquired it can't renew or release it.",
         },
         {
-          heading: "Redis or Kafka dependency failure",
-          body: "Redis and Kafka failures are injected directly (not just reasoned about) to validate that rate-limit/cache consistency and job recovery hold up when a core dependency actually goes down mid-flight, rather than only under happy-path conditions.",
+          heading: "Job fails vs. message fails",
+          body: "A job that fails due to a transient downstream issue is rescheduled through exponential backoff using its nextAttemptAt timestamp. A genuinely broken or malformed message is instead routed to a Dead Letter Topic — the platform treats these as different problems with different remedies rather than retrying everything the same way.",
         },
         {
-          heading: "Stale lock writes after a paused node wakes up",
-          body: "A node that held a lock, was paused long enough for its lease to expire, and then resumes execution attempts a write believing it's still the lock holder. The fencing token attached to that write is now stale relative to the current holder's token, and the write is rejected — lock handoff is validated directly rather than assumed correct.",
+          heading: "Partial DB/Kafka write",
+          body: "Without the Outbox pattern, a service could commit a database state change but fail to publish the corresponding Kafka event, or publish an event for a change that never actually committed. Writing both in the same local transaction removes this failure mode by construction.",
         },
       ],
       performance: [
-        "Sustained 4K+ RPS through the rate limiter with 70ms P95 / 120ms P99 latency at 5x normal load.",
-        "90%+ cache hit ratio, reducing read latency from 50ms to under 5ms on cache hits.",
-        "10,000+ jobs processed across 3–5 workers with zero duplicate side effects during forced retries.",
-        "5–10 second leader failover after forced leader pod termination.",
-        "Zipkin distributed tracing across rate-limit, cache, job-queue, locking, and leader-election workflows to pinpoint latency bottlenecks.",
+        "Cache-Aside caching across Caffeine (L1) and Redis (L2) avoids repeated round-trips to the database and to Redis itself for hot lookups.",
+        "Atomic Lua-based operations keep Redis-backed rate limiting free of check-then-act race conditions under concurrent access.",
+        "Separating retry scheduling (nextAttemptAt backoff) from Dead Letter Topic routing keeps transient job failures from being treated the same as broken messages.",
       ],
       tradeoffs: [
         {
           heading: "At-least-once + idempotency over exactly-once",
-          body: "Choosing at-least-once delivery with idempotent consumers over building exactly-once semantics trades some consumer-side complexity (every handler must be safely re-runnable) for a simpler, more provably correct delivery guarantee at the messaging layer.",
+          body: "Accepting at-least-once delivery and making consumers idempotent trades some per-handler complexity (every handler must tolerate being run twice) for a simpler, more provably correct guarantee at the messaging layer than building true exactly-once semantics.",
         },
         {
-          heading: "Fencing tokens add a check on every protected write",
-          body: "Requiring the protected resource to validate a fencing token on every write adds a check that a simpler (but unsafe) lock design wouldn't need — the cost is one comparison per write, in exchange for eliminating an entire class of stale-writer corruption bugs.",
+          heading: "Transactional Outbox adds a relay",
+          body: "The Outbox pattern removes dual-write inconsistency at the cost of an additional relay component reading unpublished events, and at-least-once delivery semantics that downstream consumers must still handle idempotently.",
         },
         {
-          heading: "Local Kind cluster over managed cloud Kubernetes",
-          body: "Running on a local 3-node Kind cluster instead of a managed cloud cluster trades production-scale realism for the ability to run destructive failure injection (killing pods, cutting off dependencies) freely and repeatably without cost or blast-radius concerns.",
+          heading: "Cache-Aside over read-through",
+          body: "Cache-Aside puts cache-population logic in the application rather than behind a transparent read-through layer — more explicit control over what's cached and when, at the cost of that logic living in application code instead of the cache itself.",
+        },
+        {
+          heading: "Expiry-based locks over fencing tokens",
+          body: "A Redis lock with an expiry is simpler to implement and reason about than a fencing-token scheme, at the cost of a narrower edge case: an instance paused long enough for its lock to expire could, in principle, still believe it holds the lock when it resumes.",
         },
       ],
       outcome:
-        "A workflow platform where rate limiting, caching, job delivery, and cluster-wide coordination were not just designed for failure but actually broken on purpose — pods killed, Redis and Kafka taken down, nodes paused — with every one of those failure paths validated to recover correctly rather than assumed to.",
+        "A job-processing platform where DB/Kafka consistency, duplicate message delivery, retry scheduling, and cross-instance coordination are each handled by an explicit, separable mechanism — Outbox, atomic claiming with idempotency, backoff-vs-DLT routing, and expiring locks behind a circuit breaker — rather than one catch-all retry loop.",
     },
   },
 ];
@@ -267,22 +239,22 @@ export type Note = {
   tags: string[];
   readTime: string;
   summary: string;
-  content: string[]; // paragraphs / markdown-lite blocks
+  content: string[];
 };
 
 export const notes: Note[] = [
   {
-    slug: "two-level-caching",
-    title: "Two-Level Caching: Cutting Report Latency from 10s to Under 2s",
-    tags: ["Caching", "Redis", "Performance"],
-    readTime: "6 min",
+    slug: "caffeine-l1-caching",
+    title: "Caffeine L1 Caching: Cutting Report Latency from 10s to Under 2s",
+    tags: ["Caching", "Caffeine", "Performance"],
+    readTime: "5 min",
     summary:
-      "Why a single cache layer wasn't enough for a financial reporting workload, and how an in-memory L1 in front of a Redis L2 changed the latency profile.",
+      "How tuning an in-process Caffeine cache — not adding more infrastructure — took report response time from 10 seconds to under 2.",
     content: [
-      "A financial risk analytics platform generating NPV, GAP, and NIM reports has an awkward latency shape: some report parameters repeat constantly within a short window (the same book, the same as-of date, requested by more than one analyst), while others are effectively one-off. A single cache layer struggles to serve both cases well — a distributed cache alone still pays network round-trip cost on every hit, and a local cache alone doesn't survive across instances or restarts.",
-      "The fix was a two-level cache: an in-memory L1 cache on each service instance for the hottest, most recently used report fragments, backed by a Redis-based L2 distributed cache that all instances share. A request first checks L1; on a miss it checks L2; only a miss on both reaches the underlying computation. This shape means the most repeated lookups never leave the process, while less-hot but still-repeated lookups are still spared a full recompute.",
-      "This two-level design reduced API response time from 10 seconds to under 2 seconds for optimized report requests. A second pass — tuning cache keys, TTLs, and eviction policy — brought total report generation time down further, from 2 minutes to 30 seconds.",
-      "The part that's easy to underestimate is cache key design. A key that's too coarse causes false sharing between logically different reports; a key that's too fine fragments the cache and tanks the hit rate. Getting this right meant keying on exactly the parameters that determine report content — no more, no less — and setting TTLs based on how often the underlying risk data actually changes, not on a round default.",
+      "A financial risk analytics platform generating NPV, NIM, GAP, and sensitivity reports has an obvious first lever for latency: caching. The less obvious part is that the biggest win here came from getting the most out of a single in-process cache layer, rather than reaching for more infrastructure. Caffeine — an in-memory, in-process cache for the JVM — was already positioned to serve the hottest, most-repeated report lookups without leaving the process at all.",
+      "The work was in the tuning: choosing cache keys precise enough to avoid false sharing between logically different reports but coarse enough to actually get hits, setting TTLs based on how often the underlying risk data changes rather than a round default, and picking an eviction policy that keeps genuinely hot entries resident instead of getting pushed out by one-off lookups.",
+      "That tuning pass reduced API response time from 10 seconds to under 2 seconds for report requests, and brought total report generation time down from 2 minutes to 30 seconds.",
+      "The lesson generalizes: a cache layer's ceiling is often set by its configuration, not its architecture. Before reaching for a second tier or a different technology, it's worth asking whether the first layer is actually configured for the access pattern it's serving.",
     ],
   },
   {
@@ -291,54 +263,94 @@ export const notes: Note[] = [
     tags: ["Kafka", "Async Processing", "Microservices"],
     readTime: "5 min",
     summary:
-      "Refactoring synchronous, long-running report generation into Kafka-driven asynchronous workflows — and what resilience looks like once you do.",
+      "Refactoring synchronous, long-running report generation into Kafka-driven asynchronous workflows — and what failure handling looks like once you do.",
     content: [
-      "Report generation that runs synchronously inside an HTTP request has a hard ceiling: the client is waiting, the connection can time out, and one slow report blocks the thread pool that everyone else's requests depend on. The response to this on the risk analytics platform was to refactor long-running report generation into Kafka-driven asynchronous workflows — a request enqueues a job instead of computing inline, and the caller is decoupled from the processing time.",
-      "This shift enabled concurrent report processing (multiple reports can be in flight without contending for the same request threads) and directly improved API responsiveness, since the synchronous part of the request became 'accept and enqueue' rather than 'compute and return'.",
-      "Moving work onto Kafka consumers introduces a different failure surface: a consumer can crash mid-message, a downstream dependency can be temporarily unavailable, or a message can be malformed. The workflow handles this with retries for transient failures, Dead Letter Topics (DLTs) for messages that exhaust their retries, and automated email notifications when a report batch ultimately fails — so a stuck job is visible instead of silent.",
-      "The underlying principle: asynchronous processing doesn't remove failure, it changes where and how you have to handle it. Retries, DLTs, and alerting are what make 'enqueue and forget' actually safe to rely on.",
+      "Report generation that runs synchronously inside an HTTP request has a hard ceiling: the client is waiting, the connection can time out, and one slow report blocks the thread pool everyone else's requests depend on. The fix was refactoring long-running report generation into Kafka-driven asynchronous workflows — a request enqueues a job instead of computing inline, decoupling the caller from the processing time.",
+      "This enabled concurrent report processing (multiple reports in flight without contending for the same request threads) and directly improved API responsiveness, since the synchronous part of the request became 'accept and enqueue' rather than 'compute and return'.",
+      "Moving work onto Kafka consumers introduces its own failure surface, handled with resilient consumer workflows: retry handling for transient failures, and MessengerClient consumers dedicated to sending automated email notifications when a report batch ultimately fails — so a stuck batch is visible to whoever needs to act on it, not silently dropped.",
+      "The underlying principle holds regardless of the specific tooling: asynchronous processing doesn't remove failure, it changes where you have to handle it. Retries and explicit failure notifications are what make 'enqueue and forget' safe to rely on operationally.",
     ],
   },
   {
-    slug: "atomic-rate-limiting-redis-lua",
-    title: "Atomic Rate Limiting with Redis and Lua",
-    tags: ["Redis", "Lua", "Distributed Systems"],
+    slug: "activepivot-mdx-olap",
+    title: "Querying OLAP Cubes with MDX for 50K+ Record Risk Reports",
+    tags: ["ActivePivot", "MDX", "OLAP"],
     readTime: "5 min",
     summary:
-      "Why a naive check-then-increment rate limiter breaks under concurrency, and how running the whole check as one Lua script inside Redis fixes it.",
+      "Financial risk reporting at scale often means querying an OLAP cube directly rather than a relational store — here's how that looks in practice.",
     content: [
-      "A rate limiter that reads the current request count, compares it to a limit, and then increments the count as two separate operations has a race condition built in: under concurrent load, two requests can both read a count just under the limit, both decide they're allowed through, and both increment — silently letting more traffic through than the limit permits.",
-      "The fix is to make the whole check-and-increment sequence atomic by running it as a single Lua script inside Redis. Redis executes Lua scripts atomically, so there's no window between the read and the write where another request can interleave — the limiter either admits a request and records it, or rejects it, as one indivisible operation.",
-      "On the distributed workflow platform, this Redis/Lua-based rate limiter sustained 4K+ RPS with 70ms P95 / 120ms P99 latency at 5x normal load — figures that came from deliberately pushing the system past its normal operating point, not from an untested best case.",
-      "The same atomicity principle shows up again in the platform's caching layer, which reached a 90%+ hit ratio and cut read latency from 50ms to under 5ms on cache hits — a reminder that most of the hard problems in this kind of system aren't about the individual operations being slow, they're about what happens when several of them try to happen at once.",
+      "NPV, NIM, GAP, and sensitivity analysis reports are inherently multi-dimensional — slicing risk exposure by book, currency, tenor, and scenario at once. Modeling that as ad hoc relational queries gets unwieldy fast. The alternative used here is querying ActivePivot in-memory OLAP cubes directly using MDX (Multidimensional Expressions), the query language purpose-built for this kind of dimensional analysis.",
+      "Java-side connectivity to the cube goes through olap4j and qfs-olap4j for standardized OLAP access, with RafalQuery APIs used for the actual analytical data retrieval — giving the reporting layer a typed, Java-native way to issue MDX queries and consume cube results without hand-rolling a bridge between the two worlds.",
+      "This path supports 50K+ record report workloads across financial risk analysis and reporting — volume that would be far more awkward to express and execute efficiently as flat relational aggregation queries.",
+      "The broader takeaway: when the domain itself is naturally multi-dimensional, reaching for a query language and storage model built for that shape (OLAP + MDX) tends to age better than forcing the problem into a relational shape it doesn't quite fit.",
     ],
   },
   {
-    slug: "idempotent-job-processing",
-    title: "Idempotent Consumers: Making At-Least-Once Delivery Safe",
+    slug: "scheduled-jobs-circuit-breakers",
+    title: "Scheduled Jobs, Dedicated Thread Pools, and Circuit Breakers",
+    tags: ["Resilience4j", "Concurrency", "Reliability"],
+    readTime: "4 min",
+    summary:
+      "Report, export, and cache-refresh workflows each got their own thread pool — and their own failure boundary.",
+    content: [
+      "Report generation, data export, and cache-refresh are three different workloads with different latency and failure profiles, but sharing a single thread pool between them means a slow export can starve report generation, or a stuck cache refresh can quietly stop the cache from ever refreshing. The fix was giving each of these workflows its own dedicated thread pool, run on a schedule rather than purely in response to requests.",
+      "Isolating thread pools this way means backpressure or slowness in one workflow doesn't propagate into the others just because they happen to share a runtime resource.",
+      "On top of that, a Resilience4j Circuit Breaker wraps failure-prone calls within these workflows, so a dependency that starts failing repeatedly gets short-circuited instead of continuing to consume threads and retry into a service that's already struggling.",
+      "Put together, these are two different resilience techniques solving two different problems: dedicated thread pools stop workloads from starving each other, and circuit breakers stop a struggling dependency from being hit harder by the very system trying to use it.",
+    ],
+  },
+  {
+    slug: "transactional-outbox",
+    title: "The Transactional Outbox Pattern: Keeping a Database and Kafka Consistent",
+    tags: ["Transactional Outbox", "Kafka", "Microservices"],
+    readTime: "5 min",
+    summary:
+      "Writing to a database and publishing to Kafka as two separate steps invites a silent class of bugs. The Outbox pattern removes it.",
+    content: [
+      "A service that writes a state change to its database and then separately publishes a Kafka event describing that change has a structural problem: those are two operations, not one, and there's no guarantee both succeed or both fail together. The database write can commit while the Kafka publish fails, or the reverse — either way, downstream consumers now have a different picture of reality than the source of truth.",
+      "The Transactional Outbox pattern fixes this by writing the state change and the outbound event to the same local database transaction. A relay process then reads unpublished events from that table and delivers them to Kafka. Because the transaction is atomic, there is no window where one half of the write happens without the other.",
+      "This shifts the guarantee for event delivery to at-least-once — the relay might publish an event more than once if it crashes between publishing and marking it as sent — which means downstream consumers need to be idempotent regardless. That's a trade worth making: at-least-once delivery with idempotent consumers is a well-understood, provably safe pattern, while inconsistent dual writes are a source of bugs that are hard to even detect, let alone fix, in production.",
+      "In the job-processing platform this pattern backs, it's what makes job-state changes and their corresponding Kafka events trustworthy as a pair — either both happened, or neither did.",
+    ],
+  },
+  {
+    slug: "cache-aside-and-atomic-rate-limiting",
+    title: "Cache-Aside with Caffeine + Redis, and Atomic Rate Limiting with Lua",
+    tags: ["Caching", "Redis", "Lua"],
+    readTime: "5 min",
+    summary:
+      "Two Redis-backed patterns from the same project: a two-level Cache-Aside layer, and rate limiting that can't race itself.",
+    content: [
+      "The job-processing platform layers Caffeine as an in-process L1 cache in front of Redis as a shared L2, using the Cache-Aside pattern: on a lookup, the application checks the cache first, and on a miss reads from the source of truth and populates the cache itself. This keeps the cache's contents explicit and predictable — nothing is cached that the application didn't decide to cache.",
+      "The same Redis instance also backs distributed rate limiting, implemented with atomic Lua operations. Rate limiting naturally involves a read (current count), a comparison (against the limit), and a write (increment) — done as three separate round-trips, concurrent requests can race between them and let more traffic through than the limit allows. Running that sequence as a single Lua script inside Redis makes it atomic: no other request can interleave partway through.",
+      "Both patterns share a theme: correctness under concurrency usually isn't about the individual read or write being wrong, it's about what can happen in the gap between operations that look atomic but aren't. Cache-Aside makes the gap explicit and application-controlled; Lua scripting closes the gap in the rate limiter entirely.",
+    ],
+  },
+  {
+    slug: "idempotent-job-claiming",
+    title: "Atomic Job Claiming: Making At-Least-Once Kafka Delivery Safe",
     tags: ["Kafka", "Idempotency", "Distributed Systems"],
     readTime: "5 min",
     summary:
-      "Kafka guarantees at-least-once delivery, not exactly-once — here's how idempotent consumers turn that into a safe guarantee for a job processing pipeline.",
+      "Kafka guarantees at-least-once delivery, not exactly-once. Atomic job claiming and idempotency checks are what make that safe to build on.",
     content: [
-      "Kafka's at-least-once delivery means a message can be redelivered — after a consumer crash, a rebalance, or a retry — and the pipeline has to be correct when that happens. The alternative, exactly-once delivery, is possible but expensive and still has sharp edges in practice. The job processing pipeline on the distributed workflow platform takes the more tractable path: accept at-least-once delivery from Kafka, and make every consumer idempotent, so redelivery produces the same end state instead of a duplicate side effect.",
-      "In practice this means each job handler is written so that processing the same message twice is safe — whether that's an upsert instead of an insert, a check against previously-recorded state before acting, or a persisted result keyed by job ID that a redelivered message can just look up instead of recomputing.",
-      "This was paired with exponential backoff for transient failures and Dead Letter Queue (DLQ) recovery for messages that exhaust their retries, across a pipeline of 3–5 workers. The whole design was validated directly: 10,000+ jobs were processed, including forced retries, with zero duplicate side effects — not inferred from the pattern, but observed under deliberate failure injection.",
-      "The broader lesson: 'at-least-once' isn't a weaker guarantee to work around, it's the honest guarantee a distributed system can actually make — idempotency is what turns it into something you can build on safely.",
+      "At-least-once delivery means a Kafka message can be redelivered — after a consumer restarts before committing its offset, after a rebalance, or on retry. For a job-processing platform, an unhandled redelivery means a job could be processed twice. The response here is explicit acknowledgements and offset management paired with atomic job claiming: when a worker picks up a job, that claim itself is an atomic operation, so two workers racing to process the same redelivered message can't both believe they own it.",
+      "Idempotency checks sit alongside job claiming as a second line of defense — even if a message is processed again, the handler is written so that reprocessing doesn't reapply side effects a second time.",
+      "This was deliberately paired with exponential backoff and nextAttemptAt-based retry scheduling for job-level failures, and separate Dead Letter Topic (DLT) routing for Kafka-level or message-level failures — so a job that just needs to wait and retry later is never conflated with a message that's actually broken and needs to be pulled out of the normal flow.",
+      "The broader point: at-least-once isn't a weaker guarantee to be worked around, it's the honest guarantee a distributed system can make. Atomic claiming and idempotency are what turn it into something safe to build a job-processing platform on top of.",
     ],
   },
   {
-    slug: "distributed-locks-and-leader-election",
-    title: "Fencing Tokens: The Part of Distributed Locking Most Implementations Skip",
-    tags: ["Distributed Locking", "Leader Election", "System Design"],
-    readTime: "6 min",
+    slug: "redis-locking-and-circuit-breakers",
+    title: "Redis Distributed Locking with Expiry, Behind a Circuit Breaker",
+    tags: ["Redis", "Resilience4j", "Distributed Locking"],
+    readTime: "4 min",
     summary:
-      "A lease-based lock alone isn't safe against a paused node waking up late — fencing tokens are what actually close that gap.",
+      "Coordinating work across application instances with Redis locks — and making sure a Redis outage doesn't take every instance down with it.",
     content: [
-      "A lease-based distributed lock — acquire a lock with a time-to-live, release it when done, let it expire if you crash — solves the obvious problem: a crashed node shouldn't hold a lock forever. But it leaves a subtler one open: a node can be paused (a long GC pause, a scheduling delay, a slow disk) for longer than the lease's TTL. While it's paused, the lease expires and another node is correctly granted the lock. When the first node resumes, it has no idea time has passed — it still believes it holds the lock, and can go ahead and write.",
-      "Fencing tokens close this gap. Every time a lock is acquired, it comes with a monotonically increasing token. The resource being protected — not just the lock itself — checks that token on every write, and rejects any write carrying a token older than the last one it accepted. A paused node that wakes up late and tries to write with its old token gets rejected, even though it still believes it's the lock holder.",
-      "On the distributed workflow platform, this was combined with leader election for cluster-wide coordination — work that should run on exactly one node across the whole cluster, not per-request. When the leader pod is killed outright, a new leader is elected automatically, with failover measured at 5–10 seconds under deliberate leader-termination testing.",
-      "Both mechanisms were validated the same way: by actually breaking them. Pods were killed, not just reasoned about, to confirm lock handoff and leader re-election behave correctly under a real failure rather than an assumed one.",
+      "When multiple instances of the same application need to coordinate — making sure only one of them performs a given piece of work at a time — a distributed lock backed by Redis is a common, lightweight solution. Giving each lock an expiry is what keeps this safe: if the instance holding the lock crashes or is killed, the lock doesn't stay held forever; it expires and becomes available again.",
+      "But that coordination now has a dependency: if Redis itself becomes slow or unavailable, every instance trying to acquire or check a lock is exposed to that failure. Wrapping those Redis calls in a Resilience4j Circuit Breaker addresses this directly — after enough failures, the breaker trips and short-circuits further calls, so instances stop piling up blocked requests against a dependency that's already struggling.",
+      "The two mechanisms solve different halves of the same reliability problem: lock expiry protects against a single instance failing while holding a lock; the circuit breaker protects the rest of the system from a shared dependency failing underneath all of them at once.",
     ],
   },
 ];
@@ -346,7 +358,7 @@ export const notes: Note[] = [
 export const skills = {
   "Languages & Core CS": [
     "Java",
-    "Data Structures & Algorithms",
+    "Data Structures & Algorithms (DSA)",
     "OOP",
     "Operating Systems",
     "DBMS",
@@ -357,28 +369,29 @@ export const skills = {
     "Hibernate",
     "REST APIs",
     "Microservices",
-    "Spring WebFlux",
-    "Kafka",
+    "Apache Kafka",
     "Redis",
-    "Caching",
+    "Caffeine",
     "Concurrency",
     "Multithreading",
-    "CompletableFuture",
     "Resilience4j",
     "System Design",
   ],
-  "Databases, Infrastructure & Tools": [
-    "MySQL",
+  "Databases, Analytics & Cloud": [
     "PostgreSQL",
-    "Docker",
-    "Kubernetes",
-    "Jenkins (CI/CD)",
-    "Git",
+    "MySQL",
+    "ActivePivot",
+    "MDX",
+    "AWS Lambda",
+    "AWS S3",
+    "AWS EC2",
+    "AWS CloudWatch",
   ],
+  "DevOps & Tools": ["Git", "GitHub Actions", "CI/CD Pipelines", "Docker"],
 };
 
 export const education = {
-  school: "BIT Mesra",
+  school: "Birla Institute of Technology, Mesra (BIT Mesra)",
   location: "Ranchi, India",
   degree: "B.Tech in Information Technology",
   gpa: "8.60/10",
@@ -386,8 +399,6 @@ export const education = {
 };
 
 export const achievements = [
-  "Received “Spot” and “Newbie” Awards at Societe Generale for strong performance and contributions.",
+  "Solved 650+ Data Structures & Algorithms problems, demonstrating strong problem-solving and algorithmic skills.",
   "Secured National Rank 844 in CODEKAZE 2021 among 200,000+ participants.",
-  "Scored in the top 1 percentile in JEE Main among 1 million+ candidates.",
-  "Awarded the merit-based GP Birla Scholarship at BIT Mesra, covering 50% of tuition fees.",
 ];

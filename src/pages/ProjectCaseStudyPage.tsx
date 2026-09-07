@@ -48,7 +48,7 @@ export default function ProjectCaseStudyPage() {
           <Section title="Architecture">
             <p className="text-[1.02rem] leading-relaxed text-text-muted">{cs.architecture}</p>
             <div className="card mt-6 max-w-md p-6">
-              <p className="eyebrow mb-4">request flow</p>
+              <p className="eyebrow mb-4">job flow</p>
               <WorkflowDiagram />
             </div>
           </Section>
@@ -68,9 +68,7 @@ export default function ProjectCaseStudyPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               {cs.failureScenarios.map((f) => (
                 <div key={f.heading} className="card p-5">
-                  <p className="font-mono text-[0.72rem] uppercase tracking-wide text-danger">
-                    {f.heading}
-                  </p>
+                  <p className="font-mono text-[0.72rem] uppercase tracking-wide text-danger">{f.heading}</p>
                   <p className="mt-2 text-[0.88rem] leading-relaxed text-text-muted">{f.body}</p>
                 </div>
               ))}

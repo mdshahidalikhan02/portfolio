@@ -14,9 +14,7 @@ function DiagramColumn({ title, nodes, accent = "ok" }: { title: string; nodes: 
               <span className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${dot}`} />
               <div>
                 <p className="font-mono text-[0.82rem] text-text">{n.label}</p>
-                {n.note ? (
-                  <p className="mt-0.5 text-[0.78rem] leading-snug text-text-faint">{n.note}</p>
-                ) : null}
+                {n.note ? <p className="mt-0.5 text-[0.78rem] leading-snug text-text-faint">{n.note}</p> : null}
               </div>
             </div>
             {i < nodes.length - 1 ? (
@@ -42,15 +40,15 @@ export default function SystemDesign() {
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           <DiagramColumn
             accent="ok"
-            title="risk analytics platform :: report request"
+            title="risk reporting platform :: report request"
             nodes={[
-              { label: "Client request", note: "NPV / GAP / NIM report parameters" },
-              { label: "Report service (microservice)", note: "Evolved off a modular monolith" },
-              { label: "L1 cache (in-memory)", note: "Hottest, most recent report fragments" },
-              { label: "L2 cache (Redis, distributed)", note: "Shared across instances" },
-              { label: "Kafka — async report job", note: "Enqueued instead of computed inline" },
-              { label: "Consumer: retries → DLT on failure", note: "+ email alert on failed batch" },
-              { label: "Report result", note: "10s → <2s · 2min → 30s" },
+              { label: "Client / analyst request", note: "NPV, NIM, GAP, sensitivity, regulatory reports" },
+              { label: "Spring Boot REST API", note: "Financial Risk Reporting Platform" },
+              { label: "MDX query → ActivePivot OLAP cube", note: "via olap4j / qfs-olap4j, RafalQuery APIs" },
+              { label: "Caffeine L1 cache", note: "Tuned keys/TTL/eviction — 10s→<2s, 2min→30s" },
+              { label: "Kafka async report job", note: "Enqueued instead of computed inline" },
+              { label: "Consumer: retry handling", note: "MessengerClient → email alert on failure" },
+              { label: "Scheduled jobs + dedicated thread pools", note: "Report / export / cache-refresh, behind Resilience4j" },
             ]}
           />
 
@@ -58,13 +56,13 @@ export default function SystemDesign() {
             accent="signal"
             title="workflow platform :: job request"
             nodes={[
-              { label: "Client request", note: "Kind cluster, 3 nodes" },
-              { label: "Redis + Lua atomic rate limiter", note: "4K+ RPS · 70ms P95 / 120ms P99 @ 5x load" },
-              { label: "Cache lookup (L1 / Redis L2)", note: "90%+ hit ratio · 50ms → <5ms on hits" },
-              { label: "Kafka job queue", note: "At-least-once delivery, 3–5 workers" },
-              { label: "Idempotent job handler", note: "10,000+ jobs, zero duplicate side effects" },
-              { label: "Lease lock + fencing token", note: "Rejects stale writes from paused nodes" },
-              { label: "Leader election", note: "5–10s failover after leader pod kill" },
+              { label: "Job submitted", note: "Persistent job lifecycle" },
+              { label: "DB write + Outbox row — same txn", note: "Transactional Outbox pattern" },
+              { label: "Relay → Kafka event", note: "At-least-once delivery" },
+              { label: "Consumer group: atomic job claim", note: "Only one worker proceeds per job" },
+              { label: "Cache-Aside (Caffeine L1 / Redis L2)", note: "App checks cache, populates on miss" },
+              { label: "Redis + Lua rate limiter / lock (expiry)", note: "Behind a Resilience4j Circuit Breaker" },
+              { label: "Idempotent execution", note: "Success — or nextAttemptAt retry / DLT" },
             ]}
           />
         </div>

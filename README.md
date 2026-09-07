@@ -6,13 +6,13 @@ All content (experience, projects, metrics, skills, education) is sourced direct
 
 ## Sections
 
-1. **Hero** — thesis statement + a live "trace" visual built from the actual latency numbers (10s → <2s, 2min → 30s).
+1. **Hero** — thesis statement + a live "trace" visual built from the actual latency numbers (10s -> <2s, 2min -> 30s).
 2. **Engineering Impact** — every measured outcome from the resume, no invented percentages.
 3. **Professional Experience** — Societe Generale roles, with stack tags and full bullet detail.
 4. **Projects** — every project from the resume, clearly labeled Personal Project vs. professional work.
-5. **Featured Case Study** — the Distributed Payment Gateway, broken down by Problem / Architecture / Decisions / Failure Scenarios / Performance / Trade-offs / Outcome, with a full dedicated page.
-6. **Engineering Notes** — four long-form technical notes (caching, async Kafka processing, idempotency, SAGA + Outbox), each with its own page.
-7. **System Design Notes** — request-flow diagrams for the risk analytics platform and the payment gateway.
+5. **Featured Case Study** — the Distributed Workflow & Job Processing Platform, broken down by Problem / Architecture / Decisions / Failure Scenarios / Performance / Trade-offs / Outcome, with a full dedicated page.
+6. **Engineering Notes** — long-form technical notes grounded in the resume's own bullets (Caffeine caching, Kafka async processing, ActivePivot/MDX OLAP, Transactional Outbox, Cache-Aside + Lua rate limiting, idempotent job claiming, Redis locking + circuit breakers).
+7. **System Design Notes** — request-flow diagrams for the risk reporting platform and the workflow platform.
 8. **Skills**, **Education & Achievements**, **Contact**, **Footer**.
 
 ## Getting started
@@ -30,7 +30,7 @@ Requires Node 18+.
 
 Everything factual lives in `src/data/content.ts`:
 
-- `profile` — name, contact links, summary
+- `profile` — name, role, contact links, summary
 - `metrics` — the Engineering Impact numbers
 - `experience` — work history
 - `projects` — project list + the detailed case study for featured projects
@@ -41,7 +41,7 @@ Add a new project by adding an object to `projects`; give it a `caseStudy` objec
 
 ## Resume download
 
-The "resume.pdf" button in the nav links to `public/resume/Md_Shahid_Khan_Resume.pdf`. Replace that file to update the downloadable resume.
+The "resume.pdf" button in the nav, the Hero's "Download resume" link, and the Contact section's resume card all point to `public/resume/Md_Shahid_Khan_Resume.pdf` via a shared `RESUME_PATH` constant (in `content.ts`) that resolves relative to the deployed base path — so it works whether the site is hosted at a domain root or a subpath. Replace that file to update the downloadable resume.
 
 ## Deployment
 
@@ -71,4 +71,4 @@ The app uses `HashRouter`, so it works on GitHub Pages with no server rewrite co
 - Palette: near-black charcoal-blue background, amber signal accent (`#D9A441`) for primary emphasis, teal (`#4FD1C5`) for "healthy" metrics, muted red for failure-scenario callouts.
 - Type: Space Grotesk (display), Inter (body), IBM Plex Mono (data, labels, eyebrows) — a deliberately technical/dashboard-flavored combination.
 - Signature element: the latency "trace" bar (`src/components/TraceBar.tsx`), reused in the Hero and Impact section, styled after a monitoring-dashboard trace and driven entirely by the resume's real before/after numbers.
-- Accessible by default: visible focus rings, `prefers-reduced-motion` respected, semantic headings.
+- Section-link navigation is router-safe: since the app uses `HashRouter` for static-host portability, nav links call a small `goToSection()` helper (`src/lib/navigation.ts`) instead of raw `#anchor` hrefs, so they don't collide with the router's own hash-based routing.

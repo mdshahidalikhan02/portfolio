@@ -54,12 +54,16 @@ export default function NotePage() {
             <Link to={`/notes/${prev.slug}`} className="font-mono text-xs text-text-muted hover:text-signal">
               ← {prev.title}
             </Link>
-          ) : <span />}
+          ) : (
+            <span />
+          )}
           {next ? (
             <Link to={`/notes/${next.slug}`} className="font-mono text-xs text-text-muted hover:text-signal sm:text-right">
               {next.title} →
             </Link>
-          ) : <span />}
+          ) : (
+            <span />
+          )}
         </div>
       </div>
     </article>

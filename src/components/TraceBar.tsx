@@ -8,8 +8,6 @@ type TraceBarProps = {
   detail?: string;
 };
 
-// Signature visual motif: a monitoring-dashboard style latency/throughput
-// trace, built directly from the resume's own measured numbers.
 export default function TraceBar({
   label,
   before,

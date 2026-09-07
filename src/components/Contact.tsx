@@ -20,9 +20,7 @@ export default function Contact() {
             download
             className="card group flex flex-col p-5 transition-colors hover:border-signal/50 sm:col-span-2"
           >
-            <span className="font-mono text-[0.68rem] uppercase tracking-wide text-text-faint">
-              Resume
-            </span>
+            <span className="font-mono text-[0.68rem] uppercase tracking-wide text-text-faint">Resume</span>
             <span className="mt-1.5 flex items-center gap-2 text-[0.95rem] text-text group-hover:text-signal">
               Download Md_Shahid_Khan_Resume.pdf ↓
             </span>
@@ -41,12 +39,8 @@ function ContactCard({ label, value, href }: { label: string; value: string; hre
       rel="noreferrer"
       className="card group flex flex-col p-5 transition-colors hover:border-signal/50"
     >
-      <span className="font-mono text-[0.68rem] uppercase tracking-wide text-text-faint">
-        {label}
-      </span>
-      <span className="mt-1.5 truncate text-[0.95rem] text-text group-hover:text-signal">
-        {value}
-      </span>
+      <span className="font-mono text-[0.68rem] uppercase tracking-wide text-text-faint">{label}</span>
+      <span className="mt-1.5 truncate text-[0.95rem] text-text group-hover:text-signal">{value}</span>
     </a>
   );
 }

@@ -34,10 +34,7 @@ export default function Experience() {
 
               <div className="mt-5 flex flex-wrap gap-2">
                 {job.stack.map((s) => (
-                  <span
-                    key={s}
-                    className="rounded-full border border-hairline px-3 py-1 font-mono text-[0.7rem] text-text-muted"
-                  >
+                  <span key={s} className="rounded-full border border-hairline px-3 py-1 font-mono text-[0.7rem] text-text-muted">
                     {s}
                   </span>
                 ))}

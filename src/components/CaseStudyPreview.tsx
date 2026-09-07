@@ -41,7 +41,7 @@ export default function CaseStudyPreview() {
 
           <div className="card flex flex-col gap-6 p-7">
             <div>
-              <p className="eyebrow mb-3">request flow</p>
+              <p className="eyebrow mb-3">job flow</p>
               <WorkflowDiagram />
             </div>
 
@@ -67,25 +67,23 @@ function Block({ heading, text }: { heading: string; text: string }) {
 
 export function WorkflowDiagram() {
   const steps = [
-    "Client request",
-    "Rate limiter (Redis + Lua, atomic)",
-    "Cache lookup (L1 in-memory / Redis L2)",
-    "Kafka job queue (at-least-once)",
-    "Worker pool (3–5, idempotent)",
-    "Distributed lock (lease + fencing token)",
-    "Leader election (cluster coordination)",
+    "Job submitted",
+    "Persist job (state) + Outbox row — same txn",
+    "Relay → Kafka event",
+    "Consumer group: atomic job claim",
+    "Cache-Aside lookup (Caffeine L1 / Redis L2)",
+    "Idempotent job execution",
+    "Success — or nextAttemptAt retry / DLT",
   ];
   return (
     <div className="space-y-0 font-mono text-[0.78rem]">
       {steps.map((s, i) => (
         <div key={s} className="relative flex items-center gap-3 py-2">
           <div className="flex flex-col items-center">
-            <span
-              className={`h-2 w-2 rounded-full ${i === 1 || i === 5 ? "bg-signal" : "bg-ok"}`}
-            />
+            <span className={`h-2 w-2 rounded-full ${i === 1 || i === 3 ? "bg-signal" : "bg-ok"}`} />
             {i < steps.length - 1 ? <span className="h-6 w-px bg-hairline-strong" /> : null}
           </div>
-          <span className={i === 1 || i === 5 ? "text-signal" : "text-text-muted"}>{s}</span>
+          <span className={i === 1 || i === 3 ? "text-signal" : "text-text-muted"}>{s}</span>
         </div>
       ))}
     </div>

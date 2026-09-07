@@ -29,9 +29,7 @@ export default function Notes() {
               <h3 className="mt-3 font-display text-lg font-semibold text-text group-hover:text-signal">
                 {n.title}
               </h3>
-              <p className="mt-2 flex-1 text-[0.88rem] leading-relaxed text-text-muted">
-                {n.summary}
-              </p>
+              <p className="mt-2 flex-1 text-[0.88rem] leading-relaxed text-text-muted">{n.summary}</p>
               <p className="mt-5 font-mono text-[0.72rem] text-text-faint">{n.readTime} read →</p>
             </Link>
           ))}

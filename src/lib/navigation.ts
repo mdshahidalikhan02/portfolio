@@ -1,9 +1,6 @@
 import { useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-// Scrolls to a section by id. If we're not on the home page, navigates
-// there first and passes the target id via router state; Home.tsx picks
-// that up on mount and scrolls once the sections exist in the DOM.
 export function useSectionNav() {
   const navigate = useNavigate();
   const location = useLocation();

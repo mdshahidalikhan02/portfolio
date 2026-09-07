@@ -11,7 +11,7 @@ export default function Hero() {
 
       <div className="container-page relative flex flex-col gap-12 py-24 md:py-32">
         <div className="fade-up max-w-3xl">
-          <p className="eyebrow mb-5">[role] backend software engineer — distributed systems</p>
+          <p className="eyebrow mb-5">[role] software engineer — distributed systems</p>
 
           <h1 className="font-display text-4xl font-semibold leading-[1.08] tracking-tight text-text sm:text-5xl md:text-6xl">
             I build backend systems that stay correct{" "}
@@ -53,22 +53,13 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="fade-up grid gap-6 rounded-xl border border-hairline bg-surface/60 p-6 backdrop-blur sm:grid-cols-2 md:max-w-2xl" style={{ animationDelay: "0.15s" }}>
+        <div
+          className="fade-up grid gap-6 rounded-xl border border-hairline bg-surface/60 p-6 backdrop-blur sm:grid-cols-2 md:max-w-2xl"
+          style={{ animationDelay: "0.15s" }}
+        >
           <p className="eyebrow col-span-full -mb-2">trace :: report-service :: prod</p>
-          <TraceBar
-            label="report request latency"
-            before="10s"
-            after="<2s"
-            beforeVal={10}
-            afterVal={2}
-          />
-          <TraceBar
-            label="full report generation"
-            before="2min"
-            after="30s"
-            beforeVal={120}
-            afterVal={30}
-          />
+          <TraceBar label="report request latency" before="10s" after="<2s" beforeVal={10} afterVal={2} />
+          <TraceBar label="full report generation" before="2min" after="30s" beforeVal={120} afterVal={30} />
         </div>
       </div>
     </section>

@@ -26,7 +26,6 @@ export default function Home() {
           document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       });
-      // Clear the state so a refresh or back-nav doesn't re-trigger the scroll.
       navigate(".", { replace: true, state: {} });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

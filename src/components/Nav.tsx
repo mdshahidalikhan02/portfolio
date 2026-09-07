@@ -39,7 +39,7 @@ export default function Nav() {
             <span>{profile.name}</span>
           </span>
           <span className="mt-0.5 font-mono text-[0.65rem] uppercase tracking-wide text-text-faint">
-            Backend Software Engineer
+            {profile.role}
           </span>
         </Link>
 
@@ -79,11 +79,7 @@ export default function Nav() {
           <ul className="container-page flex flex-col gap-1 py-3 font-mono text-sm text-text-muted">
             {LINKS.map((l) => (
               <li key={l.id}>
-                <a
-                  href={`#${l.id}`}
-                  onClick={(e) => handleClick(e, l.id)}
-                  className="block py-2"
-                >
+                <a href={`#${l.id}`} onClick={(e) => handleClick(e, l.id)} className="block py-2">
                   {l.label}
                 </a>
               </li>
