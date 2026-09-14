@@ -15,6 +15,16 @@ All content (experience, projects, metrics, skills, education) is sourced direct
 7. **System Design Notes** — request-flow diagrams for the risk reporting platform and the workflow platform.
 8. **Skills**, **Education & Achievements**, **Contact**, **Footer**.
 
+## Resume link
+
+The resume is not bundled as a downloadable file. Every "resume" touchpoint — the nav button, the Hero's "View resume" link, and the Contact section's resume card — opens the same Google Drive folder in a new tab:
+
+```
+https://drive.google.com/drive/folders/1fP-wDBmdbTlpMhyIVImilji-72obJtlI
+```
+
+This is defined once as `RESUME_LINK` in `src/data/content.ts`. To point it at a different link, update that one constant.
+
 ## Getting started
 
 ```bash
@@ -31,6 +41,7 @@ Requires Node 18+.
 Everything factual lives in `src/data/content.ts`:
 
 - `profile` — name, role, contact links, summary
+- `RESUME_LINK` — the Drive link opened by every resume touchpoint
 - `metrics` — the Engineering Impact numbers
 - `experience` — work history
 - `projects` — project list + the detailed case study for featured projects
@@ -38,10 +49,6 @@ Everything factual lives in `src/data/content.ts`:
 - `skills`, `education`, `achievements`
 
 Add a new project by adding an object to `projects`; give it a `caseStudy` object to get a full case-study page automatically (route: `/projects/<slug>`). Add a new note the same way in `notes` (route: `/notes/<slug>`).
-
-## Resume download
-
-The "resume.pdf" button in the nav, the Hero's "Download resume" link, and the Contact section's resume card all point to `public/resume/Md_Shahid_Khan_Resume.pdf` via a shared `RESUME_PATH` constant (in `content.ts`) that resolves relative to the deployed base path — so it works whether the site is hosted at a domain root or a subpath. Replace that file to update the downloadable resume.
 
 ## Deployment
 

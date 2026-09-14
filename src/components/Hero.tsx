@@ -1,4 +1,4 @@
-import { profile, RESUME_PATH } from "../data/content";
+import { profile, RESUME_LINK } from "../data/content";
 import TraceBar from "./TraceBar";
 import { useSectionNav } from "../lib/navigation";
 
@@ -44,11 +44,12 @@ export default function Hero() {
               Get in touch
             </a>
             <a
-              href={RESUME_PATH}
-              download
+              href={RESUME_LINK}
+              target="_blank"
+              rel="noreferrer"
               className="inline-flex items-center gap-2 font-mono text-[0.8rem] uppercase tracking-wide text-text-muted transition-colors hover:text-signal"
             >
-              ↓ Download resume
+              View resume ↗
             </a>
           </div>
         </div>

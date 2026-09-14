@@ -1,7 +1,8 @@
 // All facts below are sourced directly from Md Shahid Ali Khan's resume.
 // Nothing here is invented — metrics, dates, and scope are quoted as stated.
 
-export const RESUME_PATH = `${import.meta.env.BASE_URL}resume/Md_Shahid_Khan_Resume.pdf`;
+// Resume now opens as a Google Drive link instead of a bundled downloadable PDF.
+export const RESUME_LINK = "https://drive.google.com/drive/folders/1fP-wDBmdbTlpMhyIVImilji-72obJtlI";
 
 export const profile = {
   name: "Md Shahid Ali Khan",
@@ -9,7 +10,7 @@ export const profile = {
   focus: "Distributed Systems · Financial Services",
   phone: "8809682225",
   email: "2000shahid2019@gmail.com",
-  linkedin: "https://www.linkedin.com/in/md-shahid-ali-khan-aa18371b0/",
+   linkedin: "https://www.linkedin.com/in/md-shahid-ali-khan-aa18371b0/",
   linkedinLabel: "md-shahid-ali-khan",
   github: "https://github.com/mdshahidalikhan02",
   githubLabel: "mdshahidalikhan02",

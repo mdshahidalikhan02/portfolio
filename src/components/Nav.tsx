@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { profile, RESUME_PATH } from "../data/content";
+import { profile, RESUME_LINK } from "../data/content";
 import { useSectionNav } from "../lib/navigation";
 
 const LINKS = [
@@ -58,11 +58,12 @@ export default function Nav() {
         </ul>
 
         <a
-          href={RESUME_PATH}
-          download
+          href={RESUME_LINK}
+          target="_blank"
+          rel="noreferrer"
           className="hidden rounded-full border border-hairline-strong px-4 py-1.5 font-mono text-[0.72rem] uppercase tracking-wider text-text transition-colors hover:border-signal hover:text-signal md:inline-block"
         >
-          resume.pdf
+          resume ↗
         </a>
 
         <button
@@ -85,8 +86,8 @@ export default function Nav() {
               </li>
             ))}
             <li>
-              <a href={RESUME_PATH} download className="block py-2 text-signal">
-                resume.pdf ↓
+              <a href={RESUME_LINK} target="_blank" rel="noreferrer" className="block py-2 text-signal">
+                resume ↗
               </a>
             </li>
           </ul>
