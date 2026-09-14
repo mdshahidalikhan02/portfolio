@@ -48,7 +48,7 @@ export default function Nav() {
         <ul className="hidden items-center gap-7 font-mono text-[0.78rem] text-text-muted md:flex">
           {LINKS.map((l) => (
             <li key={l.id}>
-              
+              <a
                 href={`#${l.id}`}
                 onClick={(e) => handleClick(e, l.id)}
                 className="transition-colors hover:text-signal"
@@ -60,7 +60,7 @@ export default function Nav() {
         </ul>
 
         <div className="flex items-center gap-3">
-          
+          <a
             href={RESUME_LINK}
             target="_blank"
             rel="noreferrer"
