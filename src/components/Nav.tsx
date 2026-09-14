@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { profile, RESUME_LINK } from "../data/content";
 import { useSectionNav } from "../lib/navigation";
+import { useTheme } from "../lib/theme";
 
 const LINKS = [
   { id: "impact", label: "impact" },
@@ -15,6 +16,7 @@ const LINKS = [
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const { goToSection } = useSectionNav();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     setOpen(false);
@@ -46,7 +48,7 @@ export default function Nav() {
         <ul className="hidden items-center gap-7 font-mono text-[0.78rem] text-text-muted md:flex">
           {LINKS.map((l) => (
             <li key={l.id}>
-              <a
+              
                 href={`#${l.id}`}
                 onClick={(e) => handleClick(e, l.id)}
                 className="transition-colors hover:text-signal"
@@ -57,22 +59,32 @@ export default function Nav() {
           ))}
         </ul>
 
-        <a
-          href={RESUME_LINK}
-          target="_blank"
-          rel="noreferrer"
-          className="hidden rounded-full border border-hairline-strong px-4 py-1.5 font-mono text-[0.72rem] uppercase tracking-wider text-text transition-colors hover:border-signal hover:text-signal md:inline-block"
-        >
-          resume ↗
-        </a>
+        <div className="flex items-center gap-3">
+          
+            href={RESUME_LINK}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden rounded-full border border-hairline-strong px-4 py-1.5 font-mono text-[0.72rem] uppercase tracking-wider text-text transition-colors hover:border-signal hover:text-signal md:inline-block"
+          >
+            resume ↗
+          </a>
 
-        <button
-          aria-label="Toggle menu"
-          className="text-text md:hidden"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span className="font-mono text-lg">{open ? "×" : "≡"}</span>
-        </button>
+          <button
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            onClick={toggleTheme}
+            className="hidden h-8 w-8 items-center justify-center rounded-full border border-hairline-strong text-text-muted transition-colors hover:border-signal hover:text-signal md:flex"
+          >
+            <span className="font-mono text-sm">{theme === "dark" ? "☾" : "☀"}</span>
+          </button>
+
+          <button
+            aria-label="Toggle menu"
+            className="text-text md:hidden"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span className="font-mono text-lg">{open ? "×" : "≡"}</span>
+          </button>
+        </div>
       </nav>
 
       {open ? (
@@ -89,6 +101,12 @@ export default function Nav() {
               <a href={RESUME_LINK} target="_blank" rel="noreferrer" className="block py-2 text-signal">
                 resume ↗
               </a>
+            </li>
+            <li>
+              <button onClick={toggleTheme} className="flex w-full items-center gap-2 py-2 text-left">
+                <span className="font-mono">{theme === "dark" ? "☾" : "☀"}</span>
+                <span>{theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}</span>
+              </button>
             </li>
           </ul>
         </div>

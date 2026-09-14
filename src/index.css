@@ -29,7 +29,9 @@
     color: var(--color-text);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
+  
   ::selection { background: var(--color-signal); color: #0B0E14; }
   :focus-visible { outline: 2px solid var(--color-signal); outline-offset: 3px; }
   h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.01em; }
@@ -59,14 +61,14 @@
 
   .hairline { border-color: var(--color-hairline); }
 
+
   .bg-grid {
     background-image:
-      linear-gradient(to right, rgba(230,233,240,0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(230,233,240,0.035) 1px, transparent 1px);
+      linear-gradient(to right, var(--color-grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-grid-line) 1px, transparent 1px);
     background-size: 40px 40px;
   }
-
-  .text-glow { text-shadow: 0 0 32px rgba(217,164,65,0.25); }
+  .text-glow { text-shadow: 0 0 32px var(--color-glow); }
 
   .eyebrow {
     font-family: var(--font-mono);
@@ -87,4 +89,33 @@
     from { opacity: 0; transform: translateY(14px); }
     to { opacity: 1; transform: translateY(0); }
   }
+}
+
+/*
+ * Light mode overrides. Dark (defined in @theme above) is the default —
+ * this class is added to <html> only when the user switches, via
+ * src/lib/theme.tsx. Every color utility (bg-bg, text-text-muted, etc.)
+ * is generated from these custom properties, so overriding them here
+ * re-themes the whole site with no per-component changes needed.
+ */
+:root {
+  --color-glow: rgba(217, 164, 65, 0.25);
+  --color-grid-line: rgba(230, 233, 240, 0.035);
+}
+
+.light {
+  --color-bg: #F7F6F3;
+  --color-surface: #FFFFFF;
+  --color-surface-raised: #FFFFFF;
+  --color-hairline: #E3E1DA;
+  --color-hairline-strong: #CBC8BE;
+  --color-text: #14161B;
+  --color-text-muted: #4B5163;
+  --color-text-faint: #7C8296;
+  --color-signal: #B9791F;
+  --color-signal-dim: #8A6A34;
+  --color-ok: #0F8F82;
+  --color-danger: #A23F39;
+  --color-glow: rgba(185, 121, 31, 0.18);
+  --color-grid-line: rgba(20, 22, 27, 0.05);
 }

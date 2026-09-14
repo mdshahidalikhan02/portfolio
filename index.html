@@ -5,6 +5,16 @@
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0B0E14" />
+    <script>
+  // Runs before paint so a stored "light" preference doesn't flash dark first.
+  // Default (no stored value) is dark — matches the CSS default, so nothing runs.
+        try {
+          if (localStorage.getItem("theme") === "light") {
+            document.documentElement.classList.add("light");
+            document.documentElement.style.colorScheme = "light";
+          }
+        } catch (e) {}
+    </script>
 
     <title>Md Shahid Ali Khan — Software Engineer, Distributed Systems</title>
     <meta name="description" content="Software Engineer specializing in distributed systems — Kafka, Redis, microservices, and financial-grade reliability. Currently building risk reporting infrastructure at Societe Generale." />
